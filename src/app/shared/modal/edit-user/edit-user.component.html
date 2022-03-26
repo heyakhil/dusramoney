@@ -1,0 +1,15 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="text-2xl">Update User</div>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="mobile_no">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>Wallet Amount</mat-label>
+      <input matInput formControlName="wallet_amount">
+    </mat-form-field>
+    <div class="flex items-center justify-end py-2">
+      <button type="button" mat-button color="warn" (click)="dialogRef.close()" class="me-2">Cancel <mat-icon>close</mat-icon> </button>
+      <button type="submit" mat-stroked-button color="primary" cdkFocusInitial>Save <mat-icon>add</mat-icon></button>
+    </div>
+  </form>

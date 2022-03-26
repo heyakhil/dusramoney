@@ -1,0 +1,73 @@
+<app-admin-header title="Users"></app-admin-header>
+
+<div class="container mx-auto my-2">
+    
+    <div class="table-responsive">
+        <table class="table table-hover table-borderless border-1" style="width: max-content; min-width: 100%;">
+            <thead class="border-1">
+                <tr>
+                    <th>Mobile Nuber</th>
+                    <th>Referal  Code</th>
+                    <th>Verified</th>
+                    <th>Wallet Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSource">
+                    <td> {{item.mobile_no}} </td>
+                    <td> {{item.referal_code}} </td>
+                    <td> {{item.verified === "1" ? 'Yes' : item.verified === "2" ? 'Blocked':'No'}} </td>
+                    <td> Rs. {{item.wallet_amount}} </td>
+                    <td>
+                        <button (click)="editDialog(item)" mat-icon-button color="primary"> <mat-icon>edit</mat-icon> </button>
+                        <button (click)="blockDialog(item.id)" mat-icon-button> 
+                            <mat-icon *ngIf="item.verified === '2'" color="warn">block</mat-icon> 
+                            <mat-icon *ngIf="item.verified === '1'">block</mat-icon> 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+
+        <ng-container matColumnDef="mobile_no">
+            <th mat-header-cell *matHeaderCellDef> Mobile </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobile_no}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="referal_code">
+            <th mat-header-cell *matHeaderCellDef> Referal code </th>
+            <td mat-cell *matCellDef="let element"> {{element.referal_code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="verified">
+            <th mat-header-cell *matHeaderCellDef> Verified </th>
+            <td mat-cell *matCellDef="let element"> {{element.verified === 1 ? 'Yes' : element.verified === 2 ? 'Blocked':'No'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="wallet_amount">
+            <th mat-header-cell *matHeaderCellDef> Wallet Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.wallet_amount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button (click)="editDialog(element)" mat-icon-button color="primary"> <mat-icon>edit</mat-icon> </button>
+                <button (click)="blockDialog(element.id)" mat-icon-button> 
+                    <mat-icon *ngIf="element.verified === 2" color="warn">block</mat-icon> 
+                    <mat-icon *ngIf="element.verified === 1">block</mat-icon> 
+                </button>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> -->
+
+    <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+    </mat-paginator>
+</div>

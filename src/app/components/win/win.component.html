@@ -1,0 +1,128 @@
+<app-header title="Game"></app-header>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="bg-blue-900 text-gray-50 mb-3 shadow-md p-3 rounded">
+                <h3>Available Balance Rs. {{user?.wallet_amount || 0}}</h3>
+                <button mat-raised-button [routerLink]="[ '/recharge' ]" color="primary">Recharge</button>
+            </div>
+            <div *ngIf="isLoading" class="text-center py-5">
+                <span class="spinner-border text-dark text-sm"></span>
+            </div>
+            <div *ngIf="!isLoading" class="flex items-center justify-between bg-light border-1 p-3 shadow-md rounded">
+                <div>
+                    <div class="text-lg flex items-center">
+                        <mat-icon>dashboard</mat-icon>
+                        <div class="ps-2">Period</div>
+                    </div>
+                    <div class="text-2xl text-secondary text-start">{{game?.period}}</div>
+                </div>
+                <div>
+                    <div class="text-lg flex items-center">
+                        <mat-icon (click)="createGame()">access_time</mat-icon>
+                        <div class="ps-2">Countdown</div>
+                    </div>
+                    <div class="text-2xl text-secondary text-end">0{{minutes > 0 ? minutes:'0'}} : {{seconds > 0 ? seconds < 10 ? '0'+seconds:seconds : '00'}}</div>
+                </div>
+            </div>
+            <div *ngIf="!isLoading" class="flex items-center justify-center my-3">
+                <div [ngStyle]="{'opacity': disableFlow ? '0.6':'1'}" (click)="!disableFlow && openDialog('lion')" class="w-1/4 pt-2 hover:shadow-md cursor-pointer border-2 bg-gray-100 me-3">
+                    <img src="/assets/icons/lion.png" width="50px" alt="" class="mx-auto">
+                    <div class="text-md text-center">LION</div>
+                </div>
+                <div [ngStyle]="{'opacity': disableFlow ? '0.6':'1'}" (click)="!disableFlow && openDialog('tiger')" class="w-1/4 pt-2 hover:shadow-md cursor-pointer border-2 bg-gray-100 ms-3">
+                    <img src="/assets/icons/tiger.png" width="50px" alt="" class="mx-auto">
+                    <div class="text-md text-center">TIGER</div>
+                </div>
+            </div>
+            <div *ngIf="!isLoading" class="flex items-center justify-between my-3">
+                <button [disabled]="disableFlow" (click)="openDialog('red')" class="w-full mx-1 text-gray-50 bg-red-500" mat-raised-button>Red</button>
+                <button [disabled]="disableFlow" (click)="openDialog('violet')" class="w-full mx-1 text-gray-50 bg-purple-500" mat-raised-button>Violet</button>
+                <button [disabled]="disableFlow" (click)="openDialog('green')" class="w-full mx-1 text-gray-50 bg-green-500" mat-raised-button>Green</button>
+            </div>
+            <div *ngIf="!isLoading" class="grid grid-cols-5 gap-2 my-3">
+                <button [disabled]="disableFlow" *ngFor="let item of numberList" class="mx-1" color="primary" (click)="openDialog(item)"
+                    mat-raised-button>{{item}}</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <table mat-table [dataSource]="resultHistoryDataSource" class="mat-elevation-z8 w-full">
+                
+                <ng-container matColumnDef="period">
+                    <th mat-header-cell *matHeaderCellDef> Period </th>
+                    <td mat-cell *matCellDef="let element"> {{element.period}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> Price </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="number">
+                    <th mat-header-cell *matHeaderCellDef> Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="result">
+                    <th mat-header-cell *matHeaderCellDef> Result </th>
+                    <td mat-cell *matCellDef="let element" class="p-3"> 
+                        <span class="px-2 rounded-circle" [ngStyle]="{'background-color': element.result}"></span>    
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="animal">
+                    <th mat-header-cell *matHeaderCellDef> Animal </th>
+                    <td mat-cell *matCellDef="let element">
+                        <img src="/assets/icons/{{element.animal}}.png" width="20px" alt="">
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="resultDisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: resultDisplayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+            </mat-paginator>
+
+        </div>
+    </div>
+    <div class="row">
+        <table mat-table [dataSource]="gameHistoryDataSource" class="mat-elevation-z8 w-full">
+            <ng-container matColumnDef="period">
+                <th mat-header-cell *matHeaderCellDef> Period </th>
+                <td mat-cell *matCellDef="let element"> {{element.period}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="bid">
+                <th mat-header-cell *matHeaderCellDef> bid </th>
+                <td mat-cell *matCellDef="let element" class="p-3"> 
+                    <span *ngIf="element.bid != 'red' && element.bid != 'violet' && element.bid != 'green' && element.bid != 'lion' && element.bid != 'tiger'"> {{element.bid}} </span>    
+                    <span *ngIf="element.bid === 'red' || element.bid === 'violet' || element.bid === 'green'" class="px-2 rounded-circle" [ngStyle]="{'background-color': element.bid}"></span>    
+                    <img *ngIf="element.bid === 'lion' || element.bid === 'tiger'" src="/assets/icons/{{element.bid}}.png" width="20px" alt="">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="gameDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: gameDisplayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+        </mat-paginator>
+        
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<app-admin-header title="Dashboard"></app-admin-header>
+<div class="container mx-auto">
+    <div class="grid gird-cols-1 md:grid-cols-3 gap-2 my-3">
+        <div class="bg-gray-200 p-3 rounded shadow-md">
+            <mat-icon>attach_money</mat-icon>
+            <div class="text-sm">Total Bet Amount</div>
+            <div class="text-xl">Rs. {{data?.totalBet || 0}}</div>
+        </div>
+        <div class="bg-gray-200 p-3 rounded shadow-md">
+            <mat-icon>card_membership</mat-icon>
+            <div class="text-sm">Total price awarded</div>
+            <div class="text-xl">Rs. {{data?.amountGivenToUser || 0}}</div>
+        </div>
+        <div class="bg-gray-200 p-3 rounded shadow-md">
+            <mat-icon>work_outline</mat-icon>
+            <div class="text-sm">Total Profit</div>
+            <div class="text-xl">Rs. {{data?.profit || 0}}</div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-borderless border-1" style="width: max-content; min-width: 100%;">
+            <thead class="border-1">
+                <tr>
+                    <th>Period</th>
+                    <th>Amount</th>
+                    <th>Price given to User</th>
+                    <th>User count</th>
+                    <th>Color</th>
+                    <th>Number</th>
+                    <th>Animal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSource">
+                    <td> {{item.period}} </td>
+                    <td> {{item.totalAmount}} </td>
+                    <td> {{item.amountGivenToUser === null ? 'Pending ...':item.amountGivenToUser}} </td>
+                    <td> {{item.userCount}} </td>
+                    <td> 
+                        <span class="px-2 rounded-circle" [ngStyle]="{'background-color': item.winningColor}"></span>
+                    </td>
+                    <td> {{item.winningNumber}} </td>
+                    <td>
+                        <img src="/assets/icons/{{item.winningAnimal}}.png" width="20px" alt="">    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+
+        <ng-container matColumnDef="period">
+            <th mat-header-cell *matHeaderCellDef> Period </th>
+            <td mat-cell *matCellDef="let element"> {{element.period}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalAmount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amountGivenToUser">
+            <th mat-header-cell *matHeaderCellDef> Price awarded </th>
+            <td mat-cell *matCellDef="let element"> {{element.amountGivenToUser === null ? 'Pending
+                ...':element.amountGivenToUser}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userCount">
+            <th mat-header-cell *matHeaderCellDef> User count </th>
+            <td mat-cell *matCellDef="let element"> {{element.userCount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="winningColor">
+            <th mat-header-cell *matHeaderCellDef> Color </th>
+            <td mat-cell *matCellDef="let element" class="p-3">
+                <span class="px-2 rounded-circle" [ngStyle]="{'background-color': element.winningColor}"></span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="winningAnimal">
+            <th mat-header-cell *matHeaderCellDef> Animal </th>
+            <td mat-cell *matCellDef="let element">
+                <img src="/assets/icons/{{element.winningAnimal}}.png" width="20px" alt="">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="winningNumber">
+            <th mat-header-cell *matHeaderCellDef> Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.winningNumber}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> -->
+
+    <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full lg:w-2/5 mx-auto m-5">
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <mat-icon matSuffix>phone_android</mat-icon>
+        <input matInput autofocus formControlName="mobile_no">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Password</mat-label>
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <input matInput type="password" formControlName="password">
+    </mat-form-field>
+    <p class="text-secondary cursor-pointer">Forget password ?</p>
+    <button type="submit" class="w-25 me-2" color="primary" [disabled]="loginForm.invalid || isLoading" mat-raised-button>
+        <div *ngIf="isLoading">Loading ...</div>
+        <div *ngIf="!isLoading">SUBMIT</div>
+    </button>
+    <button type="button" color="primary" [routerLink]="[ '/auth/register' ]" mat-button>REGISTER</button>
+
+</form>

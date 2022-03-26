@@ -1,0 +1,78 @@
+<app-header title="Withdrawal"></app-header>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-2xl text-end mt-3">Balance : <span class="text-blue-900 text-3xl">Rs.
+          {{user?.wallet_amount}}</span></div>
+      <form [formGroup]="withdrawlForm" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-2 gap-3 mt-2">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Withdrawal amount</mat-label>
+            <input matInput type="number" formControlName="amount">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Withdrawal Type</mat-label>
+            <mat-select formControlName="type" (ngModelChange)="getWithdrwalAccounts()">
+              <mat-option value="bank">Bank</mat-option>
+              <mat-option value="upi">UPI</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-progress-bar *ngIf="isListLoading" class="w-full my-3" mode="indeterminate"></mat-progress-bar>
+        <mat-form-field *ngIf="withdrawlForm.value.type === 'bank' && !isListLoading" appearance="outline"
+          class="w-full">
+          <mat-label>Bank</mat-label>
+          <mat-select formControlName="withdrawl_id">
+            <mat-option (click)="openBankDialog()"> Add New Bank <mat-icon>add</mat-icon>
+            </mat-option>
+            <mat-option *ngFor="let item of accountList" [value]="item?.id">{{item?.bank_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="withdrawlForm.value.type === 'upi' && !isListLoading" appearance="outline"
+          class="w-full">
+          <mat-label>UPI</mat-label>
+          <mat-select formControlName="withdrawl_id">
+            <mat-option (click)="openUPIDialog()"> Add New UPI <mat-icon>add</mat-icon>
+            </mat-option>
+            <mat-option *ngFor="let item of accountList" [value]="item?.id">{{item?.upi_id}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Login password</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <button type="submit" [disabled]="withdrawlForm.invalid" mat-raised-button color="primary"
+          class="w-full md:w-25 ms-auto  my-4">Withdrawal</button>
+      </form>
+
+    </div>
+    <div class="col-md-12">
+
+      <div class="table-responsive">
+        <table class="table table-hover table-borderless border-1" style="width: max-content; min-width: 100%;">
+          <thead class="border-1">
+            <tr>
+              <th>Transaction Id</th>
+              <th>Amount</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of dataSource">
+              <td> {{item.transaction_id}} </td>
+              <td> {{item.amount}} </td>
+              <td> {{item.status}} </td>
+              <td> {{item.type}} </td>
+              <td> {{item.date}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

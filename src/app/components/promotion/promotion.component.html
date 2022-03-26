@@ -1,0 +1,59 @@
+<app-header title="Promotion"></app-header>
+<div class="container mx-auto">
+    <div class="text-xl text-center my-3">Bonus : <span class="text-3xl">Rs. {{data?.totalAmountYouGet || 0}}</span> </div>
+    <div class="w-full md:w-2/3 mx-auto">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="bg-gray-200 p-3 rounded shadow-md text-center">
+                <div class="text-xl">Total People</div>
+                <div>{{data?.userCount || 0}}</div>
+            </div>
+            <div class="bg-gray-200 p-3 rounded shadow-md text-center">
+                <div class="text-xl">Contribution</div>
+                <div>Rs. {{data?.totalAmountAddedByReferal || 0}}</div>
+            </div>
+        </div>
+        <mat-form-field appearance="outline" class="w-full mt-3">
+            <mat-label>My Promotion Code</mat-label>
+            <input matInput readonly [value]="user?.referal_code">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>My Promotion LInk</mat-label>
+            <input matInput readonly [value]="promotionLink">
+        </mat-form-field>
+        <button mat-raised-button [cdkCopyToClipboard]="promotionLink" color="primary" class="w-50 mx-auto">Copy
+            Link</button>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full my-4">
+
+        <ng-container matColumnDef="userId">
+            <th mat-header-cell *matHeaderCellDef> User Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phoneNo">
+            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneNo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reward">
+            <th mat-header-cell *matHeaderCellDef> Reward </th>
+            <td mat-cell *matCellDef="let element"> {{element.reward}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amountAdded">
+            <th mat-header-cell *matHeaderCellDef> Amount Added </th>
+            <td mat-cell *matCellDef="let element"> {{element.amountAdded}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[6, 20, 50]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,25 @@
+<mat-toolbar class="shadow-md bg-blue-900 text-gray-50 sticky top-0 w-full" style="z-index: 100;">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon (click)="location.back()">arrow_back</mat-icon>
+    </button>
+    <span class="me-3">{{title}}</span>
+    <button class="ms-auto" mat-icon-button [matMenuTriggerFor]="menuMore"> <mat-icon>more_vert</mat-icon> </button>
+    <mat-menu #menuMore="matMenu">
+        <button mat-menu-item [routerLink]="[ '/admin/dashboard' ]">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+        </button>
+        <button mat-menu-item [routerLink]="[ '/admin/withdrawl' ]">
+            <mat-icon>attach_money</mat-icon>
+            <span>Withdrawal</span>
+        </button>
+        <button mat-menu-item [routerLink]="[ '/admin/users' ]">
+            <mat-icon>person</mat-icon>
+            <span>Users</span>
+        </button>
+        <button mat-menu-item (click)="authService.logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

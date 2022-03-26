@@ -1,0 +1,19 @@
+<form [formGroup]="upiForm" (ngSubmit)="onSubmit()">
+    <div class="text-2xl">Add New UPI</div>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>UPI Id</mat-label>
+      <input matInput formControlName="upi_id">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>UPI Id type</mat-label>
+        <mat-select formControlName="upi_id_type">
+          <mat-option value="gpay">GPay</mat-option>
+          <mat-option value="phonepe">Phone pe</mat-option>
+          <mat-option value="paytm">Paytm</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="flex items-center justify-end py-2">
+      <button type="button" mat-button color="warn" (click)="dialogRef.close()" class="me-2">Cancel <mat-icon>close</mat-icon> </button>
+      <button type="submit" mat-stroked-button color="primary" cdkFocusInitial>ADD <mat-icon>add</mat-icon></button>
+    </div>
+  </form>

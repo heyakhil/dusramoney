@@ -1,0 +1,21 @@
+<div>
+  <h2 class="text-xl">Selected Biding <span class="text-secondary">[ {{data?.selectedBid | titlecase }} ]</span> </h2>
+  <!-- <button class="ms-auto" mat-icon-button><mat-icon>close</mat-icon></button> -->
+</div>
+<div>
+  <mat-button-toggle-group [(ngModel)]="selectedAmount" aria-label="Font Style">
+    <mat-button-toggle *ngFor="let item of amountList" [value]="item">{{item}}</mat-button-toggle>
+  </mat-button-toggle-group>
+  <div class="flex items-center">
+    <button (click)="quantity = quantity - 1" [disabled]="quantity <= 1" mat-icon-button color="primary"><mat-icon>remove</mat-icon></button>
+    <div class="px-3">{{quantity}}</div>
+    <button (click)="quantity = quantity + 1" mat-icon-button color="primary"><mat-icon>add</mat-icon></button>
+  </div>
+  <div class="text-lg">Total contact money is <span class="text-2xl">Rs. {{selectedAmount * quantity}}</span> </div>
+  
+  <mat-checkbox [(ngModel)]="isRuleChecked" color="primary" class="me-auto text-md py-2"> I agree PRESALE RULE</mat-checkbox>
+</div>
+<div class="flex items-center justify-end py-2">
+  <button mat-button color="warn" (click)="dialogRef.close()">CANCEL</button>
+  <button mat-raised-button color="primary" [disabled]="!isRuleChecked" (click)="onNoClick()" cdkFocusInitial>CONFIRM</button>
+</div>

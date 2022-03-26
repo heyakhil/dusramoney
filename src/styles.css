@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.snackbar-error {
+    background-color: darkred;
+}
+.snackbar-success {
+    background-color: darkgreen;
+}
+.snackbar-info {
+    background-color: black;
+}
+
+
+.table-responsive::-webkit-scrollbar {
+    height: 5px;
+  }
+  
+/* Track */
+.table-responsive::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+  
+/* Handle */
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
