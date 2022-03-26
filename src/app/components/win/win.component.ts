@@ -62,9 +62,7 @@ export class WinComponent implements OnInit {
     this.authService.userData.subscribe(res => {
       if (res) {
         this.user = res;
-        this.authService.getUser(res.token).subscribe(resp=>{
-          this.user = {...this.user,...resp.data}
-        })
+        this.getUser(res.token);
         this.getGameList(res.token)
         this.getGameHistory(res.token)
         this.getResultHistory(res.token)
@@ -82,6 +80,12 @@ export class WinComponent implements OnInit {
           this.seconds = total - (60 * this.minutes)
         }, 1000)
       }
+    })
+  }
+
+  getUser(token:string){
+    this.authService.getUser(token).subscribe(resp=>{
+      this.user = {...this.user,...resp.data}
     })
   }
 
@@ -146,6 +150,7 @@ export class WinComponent implements OnInit {
           if(res.status){
             this.snackbarService.success(res.msg)
             this.getGameHistory(this.user.token)
+            this.getUser(this.user.token)
           }else{
             this.snackbarService.error(res.msg)
           }

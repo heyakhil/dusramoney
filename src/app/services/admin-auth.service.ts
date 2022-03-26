@@ -57,6 +57,6 @@ export class AdminAuthService {
   logout(){
     this.adminData.next(null);
     localStorage.removeItem('atoken');
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/admin/auth')
   }
 }
