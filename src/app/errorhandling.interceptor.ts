@@ -32,6 +32,7 @@ export class ErrorhandlingInterceptor implements HttpInterceptor {
             this.snackbarService.error('Server connection was not established !')
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }
+          
           console.log(errorMsg);
           return throwError(errorMsg);
         })
