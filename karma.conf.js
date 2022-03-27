@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/lucky-win999'),
+      dir: require('path').join(__dirname, './coverage/trusted-mall'),
       subdir: '.',
       reporters: [
         { type: 'html' },

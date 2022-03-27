@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lucky-win999": {
+    "trusted-mall": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lucky-win999",
+            "outputPath": "dist/trusted-mall",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "lucky-win999:build:production"
+              "browserTarget": "trusted-mall:build:production"
             },
             "development": {
-              "browserTarget": "lucky-win999:build:development"
+              "browserTarget": "trusted-mall:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lucky-win999:build"
+            "browserTarget": "trusted-mall:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "lucky-win999"
+  "defaultProject": "trusted-mall"
 }

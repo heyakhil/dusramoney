@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'lucky-win999'`, () => {
+  it(`should have as title 'trusted-mall'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('lucky-win999');
+    expect(app.title).toEqual('trusted-mall');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('lucky-win999 app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('trusted-mall app is running!');
   });
 });

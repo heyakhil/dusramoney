@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'lucky-win999';
+  title = 'trusted-mall';
 
   constructor(
     private authService:AuthService,
