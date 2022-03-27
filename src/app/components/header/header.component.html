@@ -3,6 +3,7 @@
         <mat-icon (click)="location.back()">arrow_back</mat-icon>
     </button>
     <span class="px-2">{{title}}</span>
+    <img src="/assets/logo.jpeg" width="60px" alt="Logo">
     <div *ngIf="title != 'Authentication'" class="ms-auto">
         <button *ngIf="authService.isLoggedIn" mat-icon-button [matMenuTriggerFor]="menuLogout" aria-label="Example icon-button with a menu">
             <mat-icon>credit_card</mat-icon>

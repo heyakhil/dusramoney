@@ -20,8 +20,10 @@ export class PromotionComponent implements OnInit {
   promotionLink: string;
   
   displayedColumns: string[] = ['userId', 'phoneNo','reward', 'amountAdded'];
-  dataSource: MatTableDataSource<any[]> = new MatTableDataSource<any[]>([]);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  dataSource1:any = [];
+  dataSource2:any = [];
+  dataSource3:any = [];
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private dialog:MatDialog,
     private authService:AuthService,
@@ -49,8 +51,10 @@ export class PromotionComponent implements OnInit {
     this.walletService.referHistory(this.user.token).subscribe(res=>{
       if(res.status){
         this.data = res;
-        this.dataSource = new MatTableDataSource<any[]>(res.data)
-        this.dataSource.paginator = this.paginator
+        this.dataSource1 = res.data.LevelOne
+        this.dataSource2 = res.data.LevelTwo
+        this.dataSource3 = res.data.LevelThree
+        // this.dataSource.paginator = this.paginator
       }
     })
   }

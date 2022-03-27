@@ -42,7 +42,7 @@ import { UsersComponent } from './components/admin/users/users.component';
 import { EditUserComponent } from './shared/modal/edit-user/edit-user.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { AdminComponent } from './components/admin/admin.component';
-
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +88,8 @@ import { AdminComponent } from './components/admin/admin.component';
     MatSnackBarModule,
     MatSelectModule,
     MatProgressBarModule,
-    ClipboardModule
+    ClipboardModule,
+    MatTabsModule,
   ],
   providers: [
     {
