@@ -71,7 +71,7 @@ export class WinComponent implements OnInit {
             this.disableFlow = true;
           }
           if (this.time >= 180) {
-            this.createGame()
+            window.location.reload();
             return;
           }
           this.time += 1
@@ -120,13 +120,6 @@ export class WinComponent implements OnInit {
       }else{
 
       }
-    })
-  }
-
-  createGame(){
-    this.gameService.createGame(this.user.token).subscribe(res=>{
-      // this.router.navigateByUrl('win')
-      window.location.reload();
     })
   }
 

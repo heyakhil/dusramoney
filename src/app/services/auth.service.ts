@@ -25,6 +25,13 @@ export class AuthService {
   sendOTP(phone:number):Observable<any>{
     return this.http.post(environment.apiUrl+'/register',{mobile_no:phone})
   }
+  resendOTP(token:string):Observable<any>{
+    return this.http.post(environment.apiUrl+'/send-otp',{},{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
 
   register(data:any):Observable<any>{
     return this.http.put(environment.apiUrl+'/verifyOtpAndRegister',data)

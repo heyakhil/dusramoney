@@ -1,23 +1,33 @@
 <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
   <div class="text-2xl">Add New Bank</div>
-  <mat-form-field appearance="outline" class="w-full mt-2">
-    <mat-label>Full Name</mat-label>
-    <input matInput formControlName="name">
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="w-full mt-2">
-    <mat-label>IFC Code</mat-label>
-    <input matInput formControlName="ifsc_code">
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="w-full mt-2">
-    <mat-label>Bank Name</mat-label>
-    <input matInput formControlName="bank_name">
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="w-full mt-2">
-    <mat-label>Account Number</mat-label>
-    <input matInput formControlName="account_no">
-  </mat-form-field>
+  <div *ngIf="!isOTPForm">
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>IFC Code</mat-label>
+      <input matInput formControlName="ifsc_code">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>Bank Name</mat-label>
+      <input matInput formControlName="bank_name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>Account Number</mat-label>
+      <input matInput formControlName="account_no">
+    </mat-form-field>
+  </div>
+  <div *ngIf="isOTPForm">
+    <mat-form-field appearance="outline" class="w-full mt-2">
+      <mat-label>OTP</mat-label>
+      <input matInput formControlName="otp">
+    </mat-form-field>
+  </div>
   <div class="flex items-center justify-end py-2">
-    <button type="button" mat-button color="warn" (click)="dialogRef.close()" class="me-2">Cancel <mat-icon>close</mat-icon> </button>
-    <button type="submit" mat-stroked-button color="primary" cdkFocusInitial>ADD <mat-icon>add</mat-icon></button>
+    <button *ngIf="isOTPForm" (click)="isOTPForm = false" type="button" mat-stroked-button color="primary" class="me-2" cdkFocusInitial>BACK <mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button *ngIf="!isOTPForm" type="button" mat-button color="warn" (click)="dialogRef.close()" class="me-2">Cancel <mat-icon>close</mat-icon> </button>
+    <button *ngIf="!isOTPForm" (click)="sendOTP()" type="button" mat-stroked-button color="primary" cdkFocusInitial>NEXT <mat-icon>keyboard_arrow_right</mat-icon></button>
+    <button *ngIf="isOTPForm" type="submit" mat-stroked-button color="primary" cdkFocusInitial>ADD <mat-icon>add</mat-icon></button>
   </div>
 </form>

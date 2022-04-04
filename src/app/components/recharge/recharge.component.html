@@ -7,7 +7,7 @@
             <form [formGroup]="rechargeForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="outline" class="w-full mt-2">
                     <mat-label>Recharge amount</mat-label>
-                    <input matInput formControlName="amount" readonly>
+                    <input matInput formControlName="amount">
                 </mat-form-field>
                 <div class="grid grid-cols-4 gap-2">
                     <button *ngFor="let item of amountList" type="button" color="primary" class="mx-1"
