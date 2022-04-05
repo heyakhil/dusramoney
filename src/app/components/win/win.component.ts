@@ -62,16 +62,13 @@ export class WinComponent implements OnInit {
     this.authService.userData.subscribe(res => {
       if (res) {
         this.user = res;
-        this.getUser(res.token);
-        this.getGameList(res.token)
-        this.getGameHistory(res.token)
-        this.getResultHistory(res.token)
+        this.initializePage(res.token)
         setInterval(() => {
           if (this.time >= 150) {
             this.disableFlow = true;
           }
           if (this.time >= 180) {
-            window.location.reload();
+            this.createGame()
             return;
           }
           this.time += 1
@@ -81,6 +78,13 @@ export class WinComponent implements OnInit {
         }, 1000)
       }
     })
+  }
+  
+  initializePage(token:string){
+    this.getUser(token);
+    this.getGameList(token)
+    this.getGameHistory(token)
+    this.getResultHistory(token)
   }
 
   getUser(token:string){
@@ -123,6 +127,14 @@ export class WinComponent implements OnInit {
     })
   }
 
+  createGame(){
+    this.isLoading = true;
+    this.gameService.createGame(this.user.token).subscribe(res=>{
+      // this.router.navigateByUrl('win')
+      // window.location.reload();
+      this.initializePage(this.user.token)
+    })
+  }
   openDialog(x: string): void {
     const dialogRef = this.dialog.open(BidingComponent, {
       width: '700px',
