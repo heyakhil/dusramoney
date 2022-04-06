@@ -9,6 +9,7 @@
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Withdrawal amount</mat-label>
             <input matInput type="number" formControlName="amount">
+            <mat-hint>Withdrawal fee Rs. {{(0.05 * withdrawlForm.value.amount) | number: '1.0-2'}} </mat-hint>
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Withdrawal Type</mat-label>

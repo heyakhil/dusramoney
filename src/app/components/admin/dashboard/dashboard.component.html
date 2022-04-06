@@ -37,8 +37,8 @@
                     <td> {{item.totalAmount}} </td>
                     <td> {{item.amountGivenToUser === null ? 'Pending ...':item.amountGivenToUser}} </td>
                     <td> {{item.userCount}} </td>
-                    <td> 
-                        <span class="px-2 rounded-circle" [ngStyle]="{'background-color': item.winningColor}"></span>
+                    <td>
+                        <span *ngFor="let x of item.winningColor" class="px-2 mx-1 rounded-circle" [ngStyle]="{'background-color': x}"></span>    
                     </td>
                     <td> {{item.winningNumber}} </td>
                     <td>

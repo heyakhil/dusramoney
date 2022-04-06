@@ -7,7 +7,7 @@ import { AdminAuthService } from 'src/app/services/admin-auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { ConfirmationComponent } from 'src/app/shared/modal/confirmation/confirmation.component';
 import { EditUserComponent } from 'src/app/shared/modal/edit-user/edit-user.component';
-
+import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -18,6 +18,8 @@ export class UsersComponent implements OnInit {
   admin: User;
   // displayedColumns: string[] = ['mobile_no', 'referal_code', 'verified', 'wallet_amount', 'id'];
   dataSource: any = [];
+  pageIndex: number = 1;
+  pageSize:number = 6
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private dialog: MatDialog,
@@ -34,6 +36,14 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  customPagination(array:any, page_size:any, page_number:any = 1) {
+    // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+  paginationChange(event:any){
+    this.pageSize = event.pageSize
+    this.pageIndex = event.pageIndex + 1;
+  }
   usersList(token:string){
     this.authService.getUsers(token).subscribe(res=>{
       if(res.status){

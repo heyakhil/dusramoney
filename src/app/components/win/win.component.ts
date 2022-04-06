@@ -40,8 +40,8 @@ export class WinComponent implements OnInit {
   gameDisplayedColumns: string[] = ['period', 'amount', 'bid', 'status', 'time'];
   resultHistoryDataSource: MatTableDataSource<ResultHistory[]> = new MatTableDataSource<ResultHistory[]>([]);
   gameHistoryDataSource: MatTableDataSource<GameHistory[]> = new MatTableDataSource<GameHistory[]>([]);
-  @ViewChild(MatPaginator) gamePaginator: MatPaginator;
-  @ViewChild(MatPaginator) resultPaginator: MatPaginator;
+  @ViewChild('gamePaginator') gamePaginator: MatPaginator;
+  @ViewChild('resultPaginator') resultPaginator: MatPaginator;
   numberList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
   colorList = [
     { color: 'red', value: 'red' },
