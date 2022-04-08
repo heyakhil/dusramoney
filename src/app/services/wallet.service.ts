@@ -47,6 +47,13 @@ export class WalletService {
       }
     })
   }
+  withdrawDisapprove(token: string, id: number, x: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/admin/payment-cancel/'+id+'/'+x, {
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
   paymentData(token: string, data: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + '/getPaymentData', data, {
       headers: {

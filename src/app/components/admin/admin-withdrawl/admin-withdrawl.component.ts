@@ -42,6 +42,27 @@ export class AdminWithdrawlComponent implements OnInit {
     })
   }
 
+  disapproveWithdrawlRequest(id:number){
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '400px',
+      data: {message:'Would you like to add this money to users account ?'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true || result === false){
+        this.walletService.withdrawDisapprove(this.admin.token,id,result?1:0).subscribe(res=>{
+          if(res.status){
+            this.snackbarService.success(res.msg)
+            this.getWithdrawRequest(this.admin.token)
+          }else{
+            this.snackbarService.error(res.msg)
+
+          }
+        })
+      }
+    })
+  }
+
   
   openDialog(id:number): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {

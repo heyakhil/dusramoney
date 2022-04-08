@@ -30,6 +30,9 @@
                         <button (click)="openDialog(item.accessId)" mat-icon-button color="primary">
                             <mat-icon>check_circle</mat-icon>
                         </button>
+                        <button (click)="disapproveWithdrawlRequest(item.accessId)" mat-icon-button color="warn">
+                            <mat-icon>close</mat-icon>
+                        </button>
                     </td>
                 </tr>
             </tbody>
