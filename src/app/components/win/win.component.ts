@@ -131,7 +131,7 @@ export class WinComponent implements OnInit {
     this.isLoading = true;
     this.gameService.createGame(this.user.token).subscribe(res=>{
       // this.router.navigateByUrl('win')
-      // window.location.reload();
+      window.location.reload();
       this.initializePage(this.user.token)
     })
   }
