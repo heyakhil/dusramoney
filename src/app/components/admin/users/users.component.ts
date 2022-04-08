@@ -40,17 +40,22 @@ export class UsersComponent implements OnInit {
     // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
     return array.slice((page_number - 1) * page_size, page_number * page_size);
   }
-  paginationChange(event:any){
-    this.pageSize = event.pageSize
-    this.pageIndex = event.pageIndex + 1;
+  paginationChange(event:string){
+    if(event === 'next' && this.pageIndex >= 1 && this.dataSource.length > 0){
+      this.pageIndex ++;
+    }
+    if(event === 'prev' && this.pageIndex > 1){
+      this.pageIndex --;
+    }
+    this.usersList(this.admin.token)
   }
   usersList(token:string){
-    this.authService.getUsers(token).subscribe(res=>{
+    this.authService.getUsers(token,this.pageIndex).subscribe(res=>{
       if(res.status){
         this.dataSource = res.data;
         // this.dataSource.paginator = this.paginator;
       }else{
-
+        this.dataSource = []
       }
     })
   }

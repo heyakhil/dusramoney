@@ -43,6 +43,7 @@ import { EditUserComponent } from './shared/modal/edit-user/edit-user.component'
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { AdminComponent } from './components/admin/admin.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { GameInfoComponent } from './shared/modal/game-info/game-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +67,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ConfirmationComponent,
     UsersComponent,
     EditUserComponent,
-    AdminComponent
+    AdminComponent,
+    GameInfoComponent
   ],
   imports: [
     BrowserModule,

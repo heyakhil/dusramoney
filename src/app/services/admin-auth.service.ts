@@ -19,8 +19,8 @@ export class AdminAuthService {
     return this.adminData.value.token ? true : false;
   }
 
-  getUsers(token:string):Observable<any> {
-    return this.http.get(environment.apiUrl+'/admin/users',{
+  getUsers(token:string,index:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/users?page='+index,{
       headers: {
         'Authorization': `${token}`
       }

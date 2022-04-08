@@ -1,0 +1,38 @@
+<h2>Game</h2>
+<div>
+  <div class="flex items-center justify-center my-3">
+    <div
+      class="w-full md:w-1/4 pt-2 hover:shadow-md cursor-pointer border-2 bg-gray-100 me-3"
+    >
+      <img src="/assets/icons/lion.png" width="50px" alt="" class="mx-auto" />
+      <div class="text-md text-center">{{data?.lion}}</div>
+    </div>
+    <div
+      class="w-full md:w-1/4 pt-2 hover:shadow-md cursor-pointer border-2 bg-gray-100 ms-3"
+    >
+      <img src="/assets/icons/tiger.png" width="50px" alt="" class="mx-auto" />
+      <div class="text-md text-center">{{data?.tiger}}</div>
+    </div>
+  </div>
+  <div class="flex items-center justify-between my-3">
+    <button class="w-full mx-1 text-gray-50 bg-red-500" mat-raised-button>
+      {{data?.red}}
+    </button>
+    <button class="w-full mx-1 text-gray-50 bg-purple-500" mat-raised-button>
+      {{data?.violet}}
+    </button>
+    <button class="w-full mx-1 text-gray-50 bg-green-500" mat-raised-button>
+      {{data?.green}}
+    </button>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-1 my-3">
+    <button
+      *ngFor="let item of numberList"
+      class="mx-1"
+      color="primary"
+      mat-raised-button
+    >
+      {{item}} [{{ data[item] }}]
+    </button>
+  </div>
+</div>

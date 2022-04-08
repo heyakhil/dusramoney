@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminAuthService } from 'src/app/services/admin-auth.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { GameInfoComponent } from 'src/app/shared/modal/game-info/game-info.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,8 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private adminService:AdminService,
-    private authService:AdminAuthService
+    private authService:AdminAuthService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +39,20 @@ export class DashboardComponent implements OnInit {
         // this.dataSource.paginator = this.paginator
       }else{
 
+      }
+    })
+  }
+
+  showGameInfo(item:any){
+    if(!item.history) return;
+    const dialogRef = this.dialog.open(GameInfoComponent, {
+      width: '90%',
+      data: item.history
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        
       }
     })
   }

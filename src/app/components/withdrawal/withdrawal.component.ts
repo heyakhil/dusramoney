@@ -47,7 +47,7 @@ export class WithdrawalComponent implements OnInit {
 
     this.withdrawlForm = new FormGroup({
       withdrawl_id: new FormControl('',Validators.required),
-      amount: new FormControl('',[Validators.required,Validators.pattern(/^.{4,}$/)]),
+      amount: new FormControl(0,[Validators.required,Validators.pattern(/^.{4,}$/)]),
       password: new FormControl('',Validators.required),
       type: new FormControl('bank',Validators.required),
     })

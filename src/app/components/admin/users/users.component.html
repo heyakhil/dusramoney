@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody *ngIf="dataSource.length > 0">
-                <tr *ngFor="let item of customPagination(dataSource,pageSize,pageIndex)">
+                <tr *ngFor="let item of dataSource">
                     <td> {{item.mobile_no}} </td>
                     <td> {{item.referal_code}} </td>
                     <td> {{item.verified === 1 ? 'Yes' : item.verified === 2 ? 'Blocked':'No'}} </td>
@@ -29,11 +29,14 @@
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="dataSource.length == 0" class="text-xl px-2 text-center mb-4">
+            No Data
+        </div>
     </div>
 
-    <mat-paginator [length]="dataSource.length"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="[6,20,50]"
-    (page)="paginationChange($event)">
-    </mat-paginator>
+    <div class="flex float-right">
+        <button mat-raised-button color="primary" class="ms-2" [disabled]="pageIndex <= 1" (click)="paginationChange('prev')">PREV</button>
+        <div class="p-2"> {{pageIndex}} </div>
+        <button mat-raised-button color="primary" class="ms-2" [disabled]="dataSource.length <= 0" (click)="paginationChange('next')">NEXT</button>
+    </div>
 </div>
