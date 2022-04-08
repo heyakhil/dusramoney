@@ -115,7 +115,7 @@
                 <td mat-cell *matCellDef="let element"> 
                     {{element.status}} 
                     <span class="text-success" *ngIf="element.status === 'win'">+{{element.howMuchMoney != "0" ? element.howMuchMoney:''}}</span>
-                    <span class="text-danger" *ngIf="element.status === 'loss'">+{{element.howMuchMoney != "0" ? element.howMuchMoney:''}}</span>
+                    <span class="text-danger" *ngIf="element.status === 'loss'">-{{element.howMuchMoney != "0" ? element.howMuchMoney:''}}</span>
                 </td>
             </ng-container>
             
