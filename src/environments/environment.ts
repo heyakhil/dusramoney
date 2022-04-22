@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'https://v1.trustedmalls.in/api'
+  apiUrl:'https://v1.dusramoney.in/api'
 };
 
 /*
