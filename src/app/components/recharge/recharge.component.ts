@@ -16,7 +16,7 @@ import { WalletService } from 'src/app/services/wallet.service';
 export class RechargeComponent implements OnInit {
 
   user:User;
-  amountList = [500,1000,2000,5000,10000,49999]
+  amountList = [200,500,1000,2000,5000,10000,49999]
   rechargeForm: FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: any = []

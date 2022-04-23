@@ -15,6 +15,7 @@ import { WinComponent } from './components/win/win.component';
 import { WithdrawalComponent } from './components/withdrawal/withdrawal.component';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AuthGuard } from './guards/auth.guard';
+import {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component'
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path:'auth',component:AuthComponent,children:[
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'login',component:LoginComponent},
-    {path:'register',component:RegisterComponent}
+    {path:'register',component:RegisterComponent},
+    {path:'forgot-password',component:ForgotPasswordComponent},
   ]},
 ];
 

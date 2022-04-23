@@ -8,6 +8,7 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
 import { ConfirmationComponent } from 'src/app/shared/modal/confirmation/confirmation.component';
 import { EditUserComponent } from 'src/app/shared/modal/edit-user/edit-user.component';
 import { PageEvent } from '@angular/material/paginator';
+import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -24,7 +25,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private authService:AdminAuthService,
-    private snackbarService:SnackbarService
+    private snackbarService:SnackbarService,
+    private adminservice:AdminService
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +62,17 @@ export class UsersComponent implements OnInit {
     })
   }
   
-  
+  onSearch(event:any){
+    let val=event.target.value
+    this.adminservice.searchTable(this.admin.token,val).subscribe(res=>{
+     if(res.data){
+       this.dataSource = res.data
+     }else{
+       this.usersList(this.admin.token)
+       this.snackbarService.error("Please search for valid user")
+     }
+    })
+  }
   editDialog(x:any): void {
     const dialogRef = this.dialog.open(EditUserComponent, {
       width: '500px',

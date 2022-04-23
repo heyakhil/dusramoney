@@ -19,4 +19,13 @@ export class AdminService {
       }
     })
   }
+
+  searchTable(token:string,searchString:string):Observable<any> {
+    
+    return this.http.get(environment.apiUrl+'/admin/searchUser/'+searchString,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
 }

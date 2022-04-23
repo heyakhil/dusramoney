@@ -59,6 +59,14 @@ export class AuthService {
     this.handleAuthentication(token)
   }
 
+  sendResetOTP(phone:number):Observable<any>{
+    return this.http.post(environment.apiUrl+'/sendResetOtp',{mobile_no:phone})
+  }
+
+  changePassword(body:any):Observable<any>{
+    return this.http.post(environment.apiUrl+'/VerifyOtpAndChangePassword',body)
+  }
+
   logout(){
     this.userData.next(null);
     localStorage.removeItem('token');

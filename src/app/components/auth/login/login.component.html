@@ -9,7 +9,7 @@
         <mat-icon matSuffix>vpn_key</mat-icon>
         <input matInput type="password" formControlName="password">
     </mat-form-field>
-    <p class="text-secondary cursor-pointer">Forget password ?</p>
+    <p class="text-secondary cursor-pointer" [routerLink]="['/auth/forgot-password']">Forget password ?</p>
     <button type="submit" class="w-25 me-2" color="primary" [disabled]="loginForm.invalid || isLoading" mat-raised-button>
         <div *ngIf="isLoading">Loading ...</div>
         <div *ngIf="!isLoading">SUBMIT</div>
