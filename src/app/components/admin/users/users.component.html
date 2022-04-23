@@ -2,12 +2,11 @@
 
 <div class="container mx-auto my-2">
     
-    
-        <mat-form-field class="example-full-width" style="margin-top: 10px; border-bottom: 2px solid blaack;">
-         
-          <input type="text" matInput  placeholder="Search here..." (keyup)="onSearch($event)">
-        </mat-form-field>
-  
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Search</mat-label>
+        <mat-icon matSuffix>phone_android</mat-icon>
+        <input type="text" matInput  placeholder="Search here..." (keyup)="onSearch($event)">
+    </mat-form-field>
       
     <div class="table-responsive">
         <table class="table table-hover table-borderless border-1" style="width: max-content; min-width: 100%;">

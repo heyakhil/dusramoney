@@ -68,8 +68,7 @@ export class UsersComponent implements OnInit {
      if(res.data){
        this.dataSource = res.data
      }else{
-       this.usersList(this.admin.token)
-       this.snackbarService.error("Please search for valid user")
+       this.dataSource = []
      }
     })
   }

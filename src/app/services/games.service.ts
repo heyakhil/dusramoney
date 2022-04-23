@@ -53,5 +53,13 @@ export class GamesService {
     })
   }
 
+  createComplaint(token: string,body: any): Observable<any> {
+    return this.http.post(environment.apiUrl + '/addComplaint', body, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
+
 
 }

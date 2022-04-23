@@ -4,7 +4,7 @@
     </button>
     <span class="me-3">{{title}}</span>
     <button class="ms-auto" mat-icon-button [matMenuTriggerFor]="menuMore"> <mat-icon>more_vert</mat-icon> </button>
-    <mat-menu #menuMore="matMenu">
+    <mat-menu #menuMore="matMenu" style="min-width: 200px;">
         <button mat-menu-item [routerLink]="[ '/admin/dashboard' ]">
             <mat-icon>dashboard</mat-icon>
             <span>Dashboard</span>
@@ -16,6 +16,10 @@
         <button mat-menu-item [routerLink]="[ '/admin/users' ]">
             <mat-icon>person</mat-icon>
             <span>Users</span>
+        </button>
+        <button mat-menu-item [routerLink]="[ '/admin/feedback' ]">
+            <mat-icon>feedback</mat-icon>
+            <span>Feedback</span>
         </button>
         <button mat-menu-item (click)="authService.logout()">
             <mat-icon>exit_to_app</mat-icon>

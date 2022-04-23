@@ -27,9 +27,18 @@
         <button *ngIf="authService.isLoggedIn" mat-icon-button [routerLink]="[ '/promotion' ]">
             <mat-icon>card_giftcard</mat-icon>
         </button>
-        <button *ngIf="authService.isLoggedIn" mat-button (click)="authService.logout()">
-            <span>Logout</span>
-        </button>
+        
+        <button *ngIf="authService.isLoggedIn" class="ms-auto" mat-icon-button [matMenuTriggerFor]="menuMore"> <mat-icon>more_vert</mat-icon> </button>
+        <mat-menu #menuMore="matMenu">
+            <button mat-menu-item [routerLink]="[ '/complaints' ]">
+                <mat-icon>person</mat-icon>
+                <span>Complaints</span>
+            </button>
+            <button mat-menu-item (click)="authService.logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
         <button *ngIf="!authService.isLoggedIn" mat-button [routerLink]="[ '/auth' ]">
             <span>Login / Register</span>
         </button>

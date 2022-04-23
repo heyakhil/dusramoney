@@ -1,0 +1,17 @@
+<app-header title="Complaints"></app-header>
+<div class="w-full md:w-2/3 mx-auto p-4">
+    <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()" class="w-full">
+        
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="complaint">Complaint</mat-option>
+                <mat-option value="feedback">Feedback</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <textarea class="form-control" formControlName="description" placeholder="Write something here ....." cols="30" rows="10"></textarea>
+        
+        <button type="submit" [disabled]="complaintForm.invalid" mat-raised-button color="primary" class="w-50 my-4">SUBMIT</button>
+
+    </form>
+</div>

@@ -45,6 +45,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { GameInfoComponent } from './shared/modal/game-info/game-info.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { FeedbackComponent } from './components/admin/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
     AdminComponent,
     GameInfoComponent,
     ForgotPasswordComponent,
-    
+    ComplaintsComponent,
+    FeedbackComponent
     
   ],
   imports: [

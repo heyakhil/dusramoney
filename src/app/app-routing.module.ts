@@ -16,6 +16,8 @@ import { WithdrawalComponent } from './components/withdrawal/withdrawal.componen
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AuthGuard } from './guards/auth.guard';
 import {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component'
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { FeedbackComponent } from './components/admin/feedback/feedback.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -24,12 +26,14 @@ const routes: Routes = [
   {path:'recharge',component:RechargeComponent,canActivate:[AuthGuard]},
   {path:'withdrawal',component:WithdrawalComponent,canActivate:[AuthGuard]},
   {path:'promotion',component:PromotionComponent,canActivate:[AuthGuard]},
+  {path:'complaints',component:ComplaintsComponent,canActivate:[AuthGuard]},
   {path:'admin', component: AdminComponent ,children:[
     {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
     {path:'auth',component:AdminAuthComponent},
     {path:'dashboard',component:DashboardComponent,canActivate:[AdminAuthGuard]},
     {path:'users',component:UsersComponent,canActivate:[AdminAuthGuard]},
     {path:'withdrawl',component:AdminWithdrawlComponent,canActivate:[AdminAuthGuard]},
+    {path:'feedback',component:FeedbackComponent,canActivate:[AdminAuthGuard]},
   ]},
   {path:'auth',component:AuthComponent,children:[
     {path:'',redirectTo:'login',pathMatch:'full'},

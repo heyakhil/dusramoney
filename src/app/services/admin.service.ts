@@ -20,9 +20,16 @@ export class AdminService {
     })
   }
 
+  getFeedback(token:string,index:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/showComplaints?page='+index,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
+  
   searchTable(token:string,searchString:string):Observable<any> {
-    
-    return this.http.get(environment.apiUrl+'/admin/searchUser/'+searchString,{
+    return this.http.get(environment.apiUrl+'/admin/users?search='+searchString,{
       headers: {
         'Authorization': `${token}`
       }
