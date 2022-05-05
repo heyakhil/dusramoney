@@ -35,4 +35,44 @@ export class AdminService {
       }
     })
   }
+  getTransaction(token:string,index:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/transactions?page='+index,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
+
+  transactionStatusFilter(token:string,val:string):Observable<any> {
+    let payload = val ? `?status=${val}` : ''
+    return this.http.get(environment.apiUrl+'/admin/transactions'+payload,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
+
+  acceptTransaction(token:string, id:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/acceptTransaction/'+id,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
+
+  declineTransaction(token:string, id:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/declineTransaction/'+id,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
+
+  blockTransaction(token:string, id:number):Observable<any> {
+    return this.http.get(environment.apiUrl+'/admin/declineAndBlock/'+id,{
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+  }
 }
