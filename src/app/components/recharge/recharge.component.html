@@ -1,10 +1,20 @@
 <app-header title="Recharge"></app-header>
-<div class="container my-4">
+<div *ngIf="!startPayment && paymentForm.controls['transaction_id'].invalid" class="container my-4">
     <div class="row">
         <div class="col-md-12">
             <div class="text-2xl">Balance : <span class="text-blue-900 text-3xl">Rs. {{user?.wallet_amount}}</span>
             </div>
             <form [formGroup]="rechargeForm" (ngSubmit)="onSubmit()">
+                <div class="grid grid-cols-2 gap-2">
+                    <mat-form-field appearance="outline" class="w-full mt-2">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-full mt-2">
+                        <mat-label>Mobile Number</mat-label>
+                        <input type="text" matInput formControlName="mobile_no">
+                    </mat-form-field>
+                </div>
                 <mat-form-field appearance="outline" class="w-full mt-2">
                     <mat-label>Recharge amount</mat-label>
                     <input matInput formControlName="amount">
@@ -14,7 +24,7 @@
                         (click)="rechargeAmount(item)" mat-stroked-button
                         [class.mat-raised-button]="rechargeForm.value.amount === item">{{item}}</button>
                 </div>
-                <button type="submit" mat-raised-button color="primary" class="w-50 my-4">RECHARGE</button>
+                <button type="submit" [disabled]="rechargeForm.invalid" mat-raised-button color="primary" class="w-50 my-4">RECHARGE</button>
 
             </form>
         </div>
@@ -44,6 +54,24 @@
             </div>
             <mat-paginator [pageSizeOptions]="[6, 20, 50]">
             </mat-paginator>
+        </div>
+    </div>
+</div>
+<div *ngIf="startPayment || paymentForm.controls['transaction_id'].valid" class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="paymentForm" (ngSubmit)="paymentSubmit()">
+                <div class="text-xl">UPI Id: {{user?.limit?.upi}}</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 items-center">
+                    <mat-form-field appearance="outline" class="w-full mt-2">
+                        <mat-label>Reference Number</mat-label>
+                        <input type="text" matInput formControlName="reference_id">
+                    </mat-form-field>
+                    <input type="file" class="form-control" (change)="onImageSelect($event)">
+                </div>
+                <button type="button" (click)="resetPayment()" mat-raised-button color="warn" class="w-25 my-4 me-2">CANCEL</button>
+                <button type="submit" [disabled]="paymentForm.invalid" mat-raised-button color="primary" class="w-50 my-4">SUBMIT</button>
+            </form>
         </div>
     </div>
 </div>

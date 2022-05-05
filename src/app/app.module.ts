@@ -47,6 +47,8 @@ import { GameInfoComponent } from './shared/modal/game-info/game-info.component'
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { ComplaintsComponent } from './components/complaints/complaints.component';
 import { FeedbackComponent } from './components/admin/feedback/feedback.component';
+import { AdminTransactionComponent } from './components/admin/admin-transaction/admin-transaction.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { FeedbackComponent } from './components/admin/feedback/feedback.componen
     GameInfoComponent,
     ForgotPasswordComponent,
     ComplaintsComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    AdminTransactionComponent
     
   ],
   imports: [
@@ -100,6 +103,7 @@ import { FeedbackComponent } from './components/admin/feedback/feedback.componen
     MatProgressBarModule,
     ClipboardModule,
     MatTabsModule,
+    MatTooltipModule
   ],
   providers: [
     {

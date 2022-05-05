@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component'
 import { ComplaintsComponent } from './components/complaints/complaints.component';
 import { FeedbackComponent } from './components/admin/feedback/feedback.component';
+import { AdminTransactionComponent } from './components/admin/admin-transaction/admin-transaction.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
     {path:'users',component:UsersComponent,canActivate:[AdminAuthGuard]},
     {path:'withdrawl',component:AdminWithdrawlComponent,canActivate:[AdminAuthGuard]},
     {path:'feedback',component:FeedbackComponent,canActivate:[AdminAuthGuard]},
+    {path:'transaction',component:AdminTransactionComponent,canActivate:[AdminAuthGuard]},
   ]},
   {path:'auth',component:AuthComponent,children:[
     {path:'',redirectTo:'login',pathMatch:'full'},

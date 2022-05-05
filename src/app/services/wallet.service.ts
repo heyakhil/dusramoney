@@ -61,6 +61,13 @@ export class WalletService {
       }
     })
   }
+  uploadTransactionData(token: string, data: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/uploadTransactionData', data, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
   transactionHistory(token: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/transaction-history', {
       headers: {

@@ -21,6 +21,10 @@
             <mat-icon>feedback</mat-icon>
             <span>Feedback</span>
         </button>
+        <button mat-menu-item [routerLink]="[ '/admin/transaction' ]">
+            <mat-icon>account_balance</mat-icon>
+            <span>Transaction</span>
+        </button>
         <button mat-menu-item (click)="authService.logout()">
             <mat-icon>exit_to_app</mat-icon>
             <span>Logout</span>

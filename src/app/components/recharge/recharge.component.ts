@@ -16,10 +16,14 @@ import { WalletService } from 'src/app/services/wallet.service';
 export class RechargeComponent implements OnInit {
 
   user:User;
-  amountList = [200,500,1000,2000,5000,10000,49999]
+  amountList = [500,1000,2000,5000,10000,49999]
   rechargeForm: FormGroup;
+  paymentForm: FormGroup;
+  minRecharge: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: any = []
+  selectedFile: Blob;
+  startPayment:boolean = false;
   constructor(
     private authService:AuthService,
     private walletService: WalletService,
@@ -40,23 +44,26 @@ export class RechargeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.rechargeForm = new FormGroup({
-      amount: new FormControl('',Validators.required),
-      firstname: new FormControl('',Validators.required),
-      lastname: new FormControl('',Validators.required),
-      email: new FormControl('',Validators.required),
-      phone: new FormControl('',Validators.required),
-      productinfo: new FormControl('IPhone',Validators.required),
-    })
-    
     this.authService.userData.subscribe(res => {
       if (res) {
         this.user = res;
         this.authService.getUser(res.token).subscribe(resp=>{
           this.user = {...this.user,...resp.data}
+          this.rechargeForm.controls['amount'].setValidators([Validators.required,Validators.min(resp.data.limit.minimum_recharge)])
+          this.rechargeForm.controls['amount'].updateValueAndValidity()
         })
         this.getTransactionHistory()
       }
+    })
+    this.rechargeForm = new FormGroup({
+      name: new FormControl('',Validators.required),
+      mobile_no: new FormControl('',[Validators.required,Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)]),
+      amount: new FormControl('',Validators.required),
+    })
+    this.paymentForm = new FormGroup({
+      reference_id: new FormControl('',Validators.required),
+      image: new FormControl(null,Validators.required),
+      transaction_id: new FormControl(localStorage.getItem('transaction_id'),Validators.required)
     })
   }
 
@@ -72,10 +79,21 @@ export class RechargeComponent implements OnInit {
     })
   }
 
+  onImageSelect(event:any){
+    let file = event.target.files[0]
+    if(!file) return;
+    this.selectedFile = file
+    this.paymentForm.patchValue({image:file})
+  }
+
   onSubmit(){
-    this.walletService.paymentData(this.user.token,{amount:this.rechargeForm.value.amount}).subscribe(res=>{
+    this.walletService.paymentData(this.user.token,this.rechargeForm.value).subscribe(res=>{
       if(res.status){
-        location.href = res.url;
+        // location.href = res.url;
+        this.snackbarService.success(res.msg)
+        this.paymentForm.patchValue({transaction_id:res.transaction_id})
+        localStorage.setItem('transaction_id',res.transaction_id)
+        this.startPayment = true;
       }else{
         this.snackbarService.error(res.msg)
         
@@ -83,4 +101,26 @@ export class RechargeComponent implements OnInit {
     })
   }
 
+  paymentSubmit(){
+    if(this.paymentForm.invalid) return;
+    let payload = new FormData();
+    payload.append("reference_id",this.paymentForm.value.reference_id)
+    payload.append("transaction_id",this.paymentForm.value.transaction_id)
+    payload.append("image",this.selectedFile)
+    this.walletService.uploadTransactionData(this.user.token,payload).subscribe(res=>{
+      if(res.status){
+        this.snackbarService.success(res.msg)
+        this.resetPayment()
+      }else{
+        this.snackbarService.error(res.msg)
+        
+      }
+    })
+  }
+
+  resetPayment(){
+    localStorage.removeItem("transaction_id")
+    this.paymentForm.reset();
+    this.startPayment = false;
+  }
 }

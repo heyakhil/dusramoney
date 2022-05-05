@@ -1,0 +1,69 @@
+<app-admin-header title="Transactions"></app-admin-header>
+
+<div class="container mx-auto my-2">
+
+    <!-- <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Search</mat-label>
+        <mat-icon matSuffix>search</mat-icon>
+        <input type="text" matInput  placeholder="Search here..." (keyup)="onSearch($event)">
+    </mat-form-field> -->
+    <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select (selectionChange)="statusFilter($event)">
+          <mat-option value="">ALL</mat-option>
+          <mat-option value="success">Success</mat-option>
+          <mat-option value="pending">Pending</mat-option>
+          <mat-option value="decline">Decline</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <div class="table-responsive">
+        <table class="table table-hover table-borderless border-1" style="width: max-content; min-width: 100%;">
+            <thead class="border-1">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Mobile Number</th>
+                    <th>Transaction Id</th>
+                    <th>Reference Id</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataSource.length > 0">
+                <tr *ngFor="let item of dataSource">
+                    <td> <a [href]="item.image" target="_blank"><img [src]="item.image" width="40px" class="border rounded shadow-sm" alt=""></a>  </td>
+                    <td> {{item.name}} </td>
+                    <td> {{item.mobile_no}} </td>
+                    <td> {{item.transaction_id}} </td>
+                    <td> {{item.reference_id}} </td>
+                    <td> {{item.amount}} </td>
+                    <td> {{item.status}} </td>
+                    <td class="p-0">
+                        <!-- <button (click)="editDialog(item)" mat-icon-button color="primary"> <mat-icon>edit</mat-icon> </button> -->
+                        <div *ngIf="item.status === 'Pending'">
+                            <button (click)="acceptTransaction(item.reference_id)" mat-icon-button #tooltip="matTooltip" matTooltip="success"> 
+                                <mat-icon color="primary">check_circle</mat-icon> 
+                            </button>
+                            <button (click)="declineTransaction(item.reference_id)" mat-icon-button #tooltip="matTooltip" matTooltip="reject"> 
+                                <mat-icon color="warn">close</mat-icon> 
+                            </button>
+                            <button (click)="blockDialog(item.user_id)" mat-icon-button #tooltip="matTooltip" matTooltip="reject and block"> 
+                                <mat-icon color="secondary">block</mat-icon> 
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="dataSource.length == 0" class="text-xl px-2 text-center mb-4">
+            No Data
+        </div>
+    </div>
+
+    <div class="flex float-right">
+        <button mat-raised-button color="primary" class="ms-2" [disabled]="pageIndex <= 1" (click)="paginationChange('prev')">PREV</button>
+        <div class="p-2"> {{pageIndex}} </div>
+        <button mat-raised-button color="primary" class="ms-2" [disabled]="dataSource.length <= 0" (click)="paginationChange('next')">NEXT</button>
+    </div>
+</div>

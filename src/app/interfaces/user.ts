@@ -3,4 +3,5 @@ export interface User {
     phone: string;
     wallet_amount: string; 
     referal_code: string;   
+    limit: any;
 }
